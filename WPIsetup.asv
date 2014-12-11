@@ -1,13 +1,11 @@
 function WPIsetup(currentVol)
 
-% Perform WPI setup
-%
-% EXAMPLE: WPIsetup(35000); % Perform setup with syringe position set to 35 ul initially
+% WPIsetup(WPI.currentVol);
 
 clc;
 global WPI;
 
-WPI.rate = 4000;        % Delivery and withdrawl rate (nl/sec)
+WPI.rate =4000;         % Delivery and withdrawl rate (nl/sec)
 WPI.port = 'COM4';      % Get this from Windows Device Manager
 WPI.channel = 1;        % Set to whichever line used
 WPI.syringe = 'G';      % 100 ul Hamilton syringe

@@ -1,10 +1,12 @@
 function WPIinfuse(vol, time)
 
-% WPIinfuse(45, 60)
+% Deliver 'vol' nl every 'time' seconds
+%
+% EXAMPLE: WPIinfuse(2700, 60); % Deliver 2700 nl once every 60 seconds (a rate of 45 nl/sec)
 
 % Start pump running
 while(1),
     tic;
-    WPIbolus(vol*time);
+    WPIbolus(vol);
     pause(time - toc);
 end

@@ -1,6 +1,8 @@
 function WPIbolus(vol)
 
-% WPIbolus(25000)
+% Deliver a 'vol' nl bolus
+%
+% EXAMPLE: WPIbolus(25000); % Deliver a 25 ul bolus
 
 global WPI;
 
