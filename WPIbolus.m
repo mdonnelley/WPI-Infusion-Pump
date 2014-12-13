@@ -10,14 +10,13 @@ global WPI;
 if(vol > WPI.maximum - WPI.minimum) vol = WPI.maximum - WPI.minimum; end
 
 % If the volume in the syringe is insufficient then withdraw
-if(WPI.currentVol < WPI.minimum - vol) WPIwithdraw(WPI.maximum - WPI.currentVol); end
+if(WPI.currentVol - vol < WPI.minimum) WPIwithdraw(WPI.maximum - WPI.currentVol); end
 
 % Infuse
 WPIsendCommand('I');
 WPIsetValue('V',vol);
 WPIsetValue('C',0);
 WPIsendCommand('G');
-disp([datestr(now,14),' Delivering ',num2str(vol),'nl'])
 
 % Wait for the pump to move
 pause(0.25 + vol / WPI.rate)
@@ -25,7 +24,7 @@ pause(0.25 + vol / WPI.rate)
 % Check that the syringe moved correctly
 counter = WPIgetValue('C');
 if(counter / vol > 0.99),
-    str = [datestr(now,14),' Delivered ',num2str(counter),'nl successfully'];
+    str = [datestr(now,14),' Delivered ',num2str(counter),'nl'];
     disp(str)
     fprintf(WPI.logfileID, [str,'\n']);
 else

@@ -8,13 +8,13 @@ clc;
 global WPI;
 
 WPI.rate = 4000;        % Delivery and withdrawl rate (nl/sec)
-WPI.port = 'COM4';      % Get this from Windows Device Manager
+WPI.port = 'COM12';      % Get this from Windows Device Manager
 WPI.channel = 1;        % Set to whichever line used
 WPI.syringe = 'G';      % 100 ul Hamilton syringe
 WPI.minimum = 30000;    % Minimum syringe volume before refill (nl)
 WPI.maximum = 95000;    % Maximum syringe vol: Set based on syringe type (nl)
 WPI.pause = 0.01;       % Pause for serial commands (sec)
-WPI.logfilename = 'C:\Users\Martin Donnelley\Desktop\WPI Infusion Pump.log';
+WPI.logfilename = 'C:\Users\S8 Data Acquisition\Desktop\WPI Infusion Pump.log';
 
 % Close any open COM ports and log files
 WPIcleanup;
