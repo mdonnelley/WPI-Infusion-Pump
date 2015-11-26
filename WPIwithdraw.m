@@ -19,10 +19,8 @@ pause(0.25 + vol / WPI.rate)
 % Check that the syringe moved correctly
 counter = WPIgetValue('C');
 if(counter / vol > 0.99),
-    disp([datestr(now,14),' Withdrawn ', num2str(vol), 'nl'])
+    WPI.currentVol = WPI.currentVol + vol;
+    disp([datestr(now,14),' Withdrawn ', num2str(vol), 'nl, ',num2str(WPI.currentVol),' nl remaining']);
 else
     warning([datestr(now,14),' ERROR RESETTING SYRINGE'])
 end
-
-% Adjust the current volume
-WPI.currentVol = WPI.currentVol + vol;

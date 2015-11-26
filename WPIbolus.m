@@ -6,11 +6,14 @@ function WPIbolus(vol)
 
 global WPI;
 
-% Check that the bolus volume is not too large
+% Check that the bolus volume is not too large, otherwise set to max
 if(vol > WPI.maximum - WPI.minimum) vol = WPI.maximum - WPI.minimum; end
 
 % If the volume in the syringe is insufficient then withdraw
-if(WPI.currentVol - vol < WPI.minimum) WPIwithdraw(WPI.maximum - WPI.currentVol); end
+if(WPI.currentVol - vol < WPI.minimum) 
+    disp('Insufficient volume remaining in syringe. Reloading ...')
+    WPIwithdraw(WPI.maximum - WPI.currentVol);
+end
 
 % Infuse
 WPIsendCommand('I');
@@ -24,7 +27,8 @@ pause(0.25 + vol / WPI.rate)
 % Check that the syringe moved correctly
 counter = WPIgetValue('C');
 if(counter / vol > 0.99),
-    str = [datestr(now,14),' Delivered ',num2str(counter),'nl'];
+    WPI.currentVol = WPI.currentVol - vol;
+    str = [datestr(now,14),' Delivered ',num2str(counter),'nl, ',num2str(WPI.currentVol),' nl remaining'];
     disp(str)
     fprintf(WPI.logfileID, [str,'\n']);
 else
@@ -32,6 +36,3 @@ else
     warning(str)
     fprintf(WPI.logfileID, [str,'\n']);
 end
-
-% Adjust the current volume
-WPI.currentVol = WPI.currentVol - vol;
