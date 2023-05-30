@@ -1,4 +1,6 @@
-function WPIcleanup
+function WPIclose
+
+% Close serial port and logfile
 
 global WPI;
 
@@ -8,5 +10,4 @@ if(~isempty(out)), fclose(out); end
 
 % If there are open files then close them
 fclose('all');
-
 disp(['Closed ',WPI.port,' and ',WPI.logfilename])

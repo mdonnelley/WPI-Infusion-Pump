@@ -1,5 +1,7 @@
 function response = WPIsendCommand(command)
 
+% Send a single command to the WPI controller
+%
 % WPIsendCommand('I');      % Infuse
 % WPIsendCommand('W');      % Withdraw
 % WPIsendCommand('G');      % Go
@@ -13,8 +15,15 @@ function response = WPIsendCommand(command)
 % WPIsendCommand('TG');     % Syringe type
 
 global WPI;
+
 pause(WPI.pause);
 readasync(WPI.serialport);
 fprintf(WPI.serialport,command);
-response=fgetl(WPI.serialport);
+[response,count,msg]=fgetl(WPI.serialport);
 pause(WPI.pause);
+
+if(~isempty(msg)),
+    disp('Serial comms failed. Restarting serial interface')
+    WPIclose;
+    WPIopen;
+end
