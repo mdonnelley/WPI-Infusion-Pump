@@ -50,7 +50,6 @@ for i = 1:withdrawls,
 
     % Adjust the current volume
     WPI.currentVol = WPI.currentVol + vol;
-    str = [datestr(now,31),' Volume remaining ',num2str(WPI.currentVol),' nl (', num2str(WPI.maximum - WPI.currentVol), ' nl to capacity)'];
-    disp(str)
+    disp(datestr(now,31),' Volume remaining ',num2str(WPI.currentVol),' nl (', num2str(WPI.maximum - WPI.currentVol), ' nl to capacity)'])
 
 end

@@ -50,18 +50,14 @@ for i = 1:infusions,
     % Check that the syringe moved correctly
     counter = WPIgetValue('C');
     if(counter / vol > 0.99),
-        str = [datestr(now,31),' Delivered ',num2str(counter),' nl at ',num2str(rate), ' nl/sec'];
-        disp(str)
-        fprintf(WPI.logfileID, [str,'\n']);
+        disp([datestr(now,31),' Delivered ',num2str(counter),' nl at ',num2str(rate), ' nl/sec'])
     else
-        str = [datestr(now,31),' ERROR: Only ' num2str(counter), ' nl delivered!'];
-        warning(str)
-        fprintf(WPI.logfileID, [str,'\n']);
+        warning([datestr(now,31),' ERROR: Only ' num2str(counter), ' nl delivered!'])
     end
+    fprintf(WPI.logfileID, [str,'\n']);
 
     % Adjust the current volume
     WPI.currentVol = WPI.currentVol - vol;
-    str = [datestr(now,31),' Volume remaining ',num2str(WPI.currentVol),' nl'];
-    disp(str)
+    disp([datestr(now,31),' Volume remaining ',num2str(WPI.currentVol),' nl'])
 
 end
